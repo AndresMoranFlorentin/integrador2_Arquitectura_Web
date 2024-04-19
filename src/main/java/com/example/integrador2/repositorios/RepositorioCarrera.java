@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 
 public class RepositorioCarrera implements RepoCarreraInt {
     private EntityManager em=null;
+    public RepositorioCarrera(){
+
+    }
     public RepositorioCarrera(EntityManager em){
         this.em=em;
     }

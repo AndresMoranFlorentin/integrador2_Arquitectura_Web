@@ -6,7 +6,11 @@ import javax.persistence.EntityManager;
 
 public class RepositorioEstudiante implements RepoEstudianteInt {
     private EntityManager em=null;
+    public RepositorioEstudiante(){
+
+    }
     public RepositorioEstudiante(EntityManager em){
+
         this.em=em;
     }
     @Override

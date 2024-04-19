@@ -3,12 +3,13 @@ package com.example.integrador2.entidades;
 import jakarta.persistence.*;
 import org.apache.derby.iapi.services.io.LimitInputStream;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Estudiante {
+public class Estudiante implements Serializable {
     @Id
-    private int dni;
+    private Long dni;
     @Column
     private Long libretaUniversitaria;
     @Column
@@ -19,13 +20,13 @@ public class Estudiante {
     private String genero;
     @Column
     private String ciudad;
-    @ManyToMany
-    private List<Carrera> carreras;
+    @OneToMany(mappedBy = "estudiante")
+    private List<Carrera_Estudiante> carreras;
 
     public Estudiante() {
     }
 
-    public Estudiante(int dni, Long libretaUniversitaria, String nombre, String apellido, String genero, String ciudad) {
+    public Estudiante(Long dni, Long libretaUniversitaria, String nombre, String apellido, String genero, String ciudad) {
         this.dni = dni;
         this.libretaUniversitaria = libretaUniversitaria;
         this.nombre = nombre;
@@ -34,7 +35,7 @@ public class Estudiante {
         this.ciudad = ciudad;
     }
 
-    public int getDni() {
+    public Long getDni() {
         return dni;
     }
 

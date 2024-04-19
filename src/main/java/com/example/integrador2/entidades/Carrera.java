@@ -1,19 +1,20 @@
 package com.example.integrador2.entidades;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Carrera {
+public class Carrera implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id_carrera;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_carrera;
     @Column
     private String nombre;
     @Column
     private int duracion;
-    @ManyToMany
-    private List<Estudiante> estudiantes;
+    @OneToMany(mappedBy = "carrera")
+    private List<Carrera_Estudiante> estudiantes;
 
     public Carrera() {
     }
@@ -23,7 +24,7 @@ public class Carrera {
         this.duracion = duracion;
     }
 
-    public int getId_carrera() {
+    public Long getId_carrera() {
         return id_carrera;
     }
 
@@ -41,5 +42,15 @@ public class Carrera {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrera{" +
+                "id_carrera=" + id_carrera +
+                ", nombre='" + nombre + '\'' +
+                ", duracion=" + duracion +
+                ", estudiantes=" + estudiantes +
+                '}';
     }
 }

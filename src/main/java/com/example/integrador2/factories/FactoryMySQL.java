@@ -1,5 +1,8 @@
 package com.example.integrador2.factories;
 
+import com.example.integrador2.repositorios.RepositorioCarrera;
+import com.example.integrador2.repositorios.RepositorioCarreraEstudiante;
+import com.example.integrador2.repositorios.RepositorioEstudiante;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -11,7 +14,20 @@ public class FactoryMySQL extends FactoryGeneral {
     private EntityManagerFactory entManagerFactory=null;
     public FactoryMySQL() {
     }
-    public FactoryMySQL(EntityManager entManager, EntityManagerFactory entManagerFactory) {
+    EntityManagerFactory emf=Persistence.createEntityManagerFactory("baseDeDatosMySQL");
+    public void closeConexion(){
+        emf.close();
+    }
+    public RepositorioEstudiante getEstudiante(){
+        return new RepositorioEstudiante();
+    }
+    public RepositorioCarrera getCarrera(){
+        return new RepositorioCarrera();
+    }
+    public RepositorioCarreraEstudiante getCarreraEstudiante(){
+        return new RepositorioCarreraEstudiante();
+    }
+    /*public FactoryMySQL(EntityManager entManager, EntityManagerFactory entManagerFactory) {
         this.entManager = entManager;
         this.entManagerFactory = entManagerFactory;
     }
@@ -33,5 +49,5 @@ public class FactoryMySQL extends FactoryGeneral {
 
     public EntityManagerFactory getEntManagerFactory() {
         return entManagerFactory;
-    }
+    }*/
 }

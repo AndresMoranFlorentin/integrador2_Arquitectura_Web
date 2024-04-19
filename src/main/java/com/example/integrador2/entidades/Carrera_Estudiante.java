@@ -2,26 +2,29 @@ package com.example.integrador2.entidades;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 @Entity
-public class Carrera_Estudiante {
+public class Carrera_Estudiante implements Serializable {
     @Id
-    private int dni;
+    private Long dni;
     @Id
-    private int id_carrera;
+    private Long id_carrera;
     @Column
     private Date fecha_inscripcion;
     @Column
     private Date fecha_graduacion;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "fk_estudiante")
     private Estudiante estudiante;
 
     public Carrera_Estudiante() {
     }
 
-    public Carrera_Estudiante(int dni, int id_carrera, Date fecha_inscripcion) {
+    public Carrera_Estudiante(Long dni, Long id_carrera, Date fecha_inscripcion) {
         this.dni = dni;
         this.id_carrera = id_carrera;
         this.fecha_inscripcion = fecha_inscripcion;
@@ -52,11 +55,11 @@ public class Carrera_Estudiante {
         }
     }
 
-    public int getDni() {
+    public Long getDni() {
         return dni;
     }
 
-    public int getId_carrera() {
+    public Long getId_carrera() {
         return id_carrera;
     }
 
