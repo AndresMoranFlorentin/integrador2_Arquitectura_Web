@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="baseDeDatosMySQL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.example.integrador2.entidades.Carrera</class>
+        <class>com.example.integrador2.entidades.Estudiante</class>
+        <class>com.example.integrador2.entidades.Carrera_Estudiante</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/integrador2jpa"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <!-- Otras propiedades de configuración de Hibernate -->
+            <!-- Propiedad para la generacion automatica del esquema de base de datos -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+   <persistence-unit name="baseDeDatosDerby">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.example.integrador2.entidades.Carrera</class>
+        <class>com.example.integrador2.entidades.Estudiante</class>
+        <class>com.example.integrador2.entidades.Carrera_Estudiante</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:derby:MyDataBase;create=true" />
+        <property name="jakarta.persistence.jdbc.user" value="root" />
+            <property name="jakarta.persistence.jdbc.password" value="root" />
+        </properties>
+    </persistence-unit>
+</persistence>
