@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Carrera implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_carrera;
     @Column
     private String nombre;
@@ -19,7 +19,8 @@ public class Carrera implements Serializable {
     public Carrera() {
     }
 
-    public Carrera(String nombre, int duracion) {
+    public Carrera(Long id,String nombre, int duracion) {
+        this.id_carrera=id;
         this.nombre = nombre;
         this.duracion = duracion;
     }

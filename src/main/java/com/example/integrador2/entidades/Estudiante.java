@@ -18,6 +18,7 @@ public class Estudiante implements Serializable {
     private String apellido;
     @Column
     private String genero;
+    @Column int edad;
     @Column
     private String ciudad;
     @OneToMany(mappedBy = "estudiante")
@@ -26,12 +27,13 @@ public class Estudiante implements Serializable {
     public Estudiante() {
     }
 
-    public Estudiante(Long dni, Long libretaUniversitaria, String nombre, String apellido, String genero, String ciudad) {
+    public Estudiante(Long dni, Long libretaUniversitaria, String nombre, String apellido, String genero,int edad, String ciudad) {
         this.dni = dni;
         this.libretaUniversitaria = libretaUniversitaria;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
+        this.edad=edad;
         this.ciudad = ciudad;
     }
 
@@ -54,6 +56,9 @@ public class Estudiante implements Serializable {
     public String getGenero() {
         return genero;
     }
+    public int getEdad(){
+        return this.edad;
+    }
 
     public String getCiudad() {
         return ciudad;
@@ -69,6 +74,9 @@ public class Estudiante implements Serializable {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+    public void setEdad(int e){
+        this.edad=e;
     }
 
     public void setCiudad(String ciudad) {

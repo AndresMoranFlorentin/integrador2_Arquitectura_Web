@@ -10,11 +10,12 @@ import jakarta.persistence.Persistence;
 public class FactoryMySQL extends FactoryGeneral {
     private static FactoryMySQL instance = null;
     private static String nombreUnidad="baseDeDatosMySQL";
-    private EntityManager entManager=null;
+    private static EntityManagerFactory emf=Persistence.createEntityManagerFactory("baseDeDatosMySQL");
+    private static EntityManager entManager=emf.createEntityManager();
+
     private EntityManagerFactory entManagerFactory=null;
     public FactoryMySQL() {
     }
-    EntityManagerFactory emf=Persistence.createEntityManagerFactory("baseDeDatosMySQL");
     public void closeConexion(){
         emf.close();
     }
@@ -42,12 +43,13 @@ public class FactoryMySQL extends FactoryGeneral {
         }
         return instance;
     }
-
-    public EntityManager getEntManager() {
+public EntityManagerFactory getEntManagerFactory() {
+        return entManagerFactory;
+    }
+     */
+    public static EntityManager getEntManager() {
         return entManager;
     }
 
-    public EntityManagerFactory getEntManagerFactory() {
-        return entManagerFactory;
-    }*/
+
 }

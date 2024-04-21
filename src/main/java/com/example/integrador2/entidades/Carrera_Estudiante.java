@@ -7,6 +7,8 @@ import java.util.Date;
 @Entity
 public class Carrera_Estudiante implements Serializable {
     @Id
+    private Long id;
+    @Id
     private Long dni;
     @Id
     private Long id_carrera;
@@ -14,6 +16,8 @@ public class Carrera_Estudiante implements Serializable {
     private Date fecha_inscripcion;
     @Column
     private Date fecha_graduacion;
+    @Column
+    private int antiguedad;
     @ManyToOne
     @JoinColumn(name = "fk_carrera")
     private Carrera carrera;
@@ -24,11 +28,15 @@ public class Carrera_Estudiante implements Serializable {
     public Carrera_Estudiante() {
     }
 
-    public Carrera_Estudiante(Long dni, Long id_carrera, Date fecha_inscripcion) {
+    public Carrera_Estudiante(Long id,Long dni,Long id_carrera, Date fecha_inscripcion,Date graduacion,int antiguedad) {
+        this.id=id;
         this.dni = dni;
         this.id_carrera = id_carrera;
         this.fecha_inscripcion = fecha_inscripcion;
+        this.fecha_graduacion=graduacion;
+        this.antiguedad=antiguedad;
     }
+
 
     /**
      *
@@ -54,7 +62,9 @@ public class Carrera_Estudiante implements Serializable {
           }
         }
     }
-
+    public Long getId(){
+        return this.id;
+    }
     public Long getDni() {
         return dni;
     }
