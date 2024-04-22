@@ -20,13 +20,13 @@ public class FactoryMySQL extends FactoryGeneral {
         emf.close();
     }
     public RepositorioEstudiante getEstudiante(){
-        return new RepositorioEstudiante();
+        return new RepositorioEstudiante(entManager);
     }
     public RepositorioCarrera getCarrera(){
-        return new RepositorioCarrera();
+        return new RepositorioCarrera(entManager);
     }
     public RepositorioCarreraEstudiante getCarreraEstudiante(){
-        return new RepositorioCarreraEstudiante();
+        return new RepositorioCarreraEstudiante(entManager);
     }
     /*public FactoryMySQL(EntityManager entManager, EntityManagerFactory entManagerFactory) {
         this.entManager = entManager;

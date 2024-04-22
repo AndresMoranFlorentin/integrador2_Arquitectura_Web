@@ -7,12 +7,11 @@ import com.example.integrador2.entidades.Estudiante;
 import jakarta.persistence.EntityManager;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class SubirCsv {
@@ -38,8 +37,7 @@ public class SubirCsv {
             }
         }
         eManager.getTransaction().commit();
-       // eManager.close();
-    }
+     }
 
     public void insertarEstudiantes(String url) throws IOException {
         eManager.getTransaction().begin();
@@ -61,13 +59,11 @@ public class SubirCsv {
             }
         }
         eManager.getTransaction().commit();
-      //  eManager.close();
-    }
+     }
 
     public void insertarCarreraEstudiante(String urlEstuCarre) throws IOException, ParseException {
         eManager.getTransaction().begin();
         BufferedReader lector = new BufferedReader(new FileReader(urlEstuCarre));
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy"); // Formato solo para el año
 
         String linea = "";
         String filas[] = null;
@@ -79,16 +75,18 @@ public class SubirCsv {
                 Long idCarrera=Long.parseLong(filas[2]);
                 int añoInscripcion = Integer.parseInt(filas[3]);
                 int añoGraduacion = Integer.parseInt(filas[4]);
-                Date inscripcion = formatoFecha.parse(String.valueOf(añoInscripcion)); // Convierte el año en un objeto Date
-                Date graduacion = formatoFecha.parse(String.valueOf(añoGraduacion)); // Convierte el año en un objeto Date
-                int antiguedad=Integer.parseInt(filas[5]);
+                int antiguedad = Integer.parseInt(filas[5]);
 
-                Carrera_Estudiante carreEstu=new Carrera_Estudiante(id,dni,idCarrera,inscripcion,graduacion,antiguedad);
+                LocalDate inscripcion = LocalDate.ofYearDay(añoInscripcion, 1); // El primer día del año de inscripción
+                LocalDate graduacion = LocalDate.ofYearDay(añoGraduacion, 1); // El primer día del año de graduación
+                if(añoGraduacion==0){
+                    graduacion=null;
+                }
+                Carrera_Estudiante carreEstu = new Carrera_Estudiante(id, dni, idCarrera, inscripcion, graduacion, antiguedad);
 
                 eManager.persist(carreEstu);
             }
         }
         eManager.getTransaction().commit();
-      //  eManager.close();
-    }
+     }
 }

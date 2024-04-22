@@ -3,6 +3,7 @@ package com.example.integrador2.entidades;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 public class Carrera_Estudiante implements Serializable {
@@ -13,9 +14,9 @@ public class Carrera_Estudiante implements Serializable {
     @Id
     private Long id_carrera;
     @Column
-    private Date fecha_inscripcion;
+    private LocalDate fecha_inscripcion;
     @Column
-    private Date fecha_graduacion;
+    private LocalDate fecha_graduacion;
     @Column
     private int antiguedad;
     @ManyToOne
@@ -28,7 +29,7 @@ public class Carrera_Estudiante implements Serializable {
     public Carrera_Estudiante() {
     }
 
-    public Carrera_Estudiante(Long id,Long dni,Long id_carrera, Date fecha_inscripcion,Date graduacion,int antiguedad) {
+    public Carrera_Estudiante(Long id,Long dni,Long id_carrera, LocalDate fecha_inscripcion,LocalDate graduacion,int antiguedad) {
         this.id=id;
         this.dni = dni;
         this.id_carrera = id_carrera;
@@ -44,7 +45,7 @@ public class Carrera_Estudiante implements Serializable {
      * @param dni el dni del estudiante que se graduo de la carrera
      * @param id_carrera el id de la carrera en la cual se graduo el estudiante
      */
-    public void addFechaGraduacion(Date fecha, int dni, int id_carrera){
+    public void addFechaGraduacion(LocalDate fecha, int dni, int id_carrera){
 
         if(this.fecha_inscripcion.compareTo(fecha)<0){
             /**
@@ -73,11 +74,11 @@ public class Carrera_Estudiante implements Serializable {
         return id_carrera;
     }
 
-    public Date getFecha_inscripcion() {
+    public LocalDate getFecha_inscripcion() {
         return fecha_inscripcion;
     }
 
-    public Date getFecha_graduacion() {
+    public LocalDate getFecha_graduacion() {
         return fecha_graduacion;
     }
 

@@ -2,6 +2,7 @@ package com.example.integrador2.entidades;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,7 @@ public class Carrera implements Serializable {
         this.id_carrera=id;
         this.nombre = nombre;
         this.duracion = duracion;
+        this.estudiantes=new ArrayList<>();
     }
 
     public Long getId_carrera() {
@@ -36,7 +38,9 @@ public class Carrera implements Serializable {
     public int getDuracion() {
         return duracion;
     }
-
+    public void addEstudianteAlaCarrera(Carrera_Estudiante carEstu){
+        this.estudiantes.add(carEstu);
+    }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

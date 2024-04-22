@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.apache.derby.iapi.services.io.LimitInputStream;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,7 @@ public class Estudiante implements Serializable {
         this.genero = genero;
         this.edad=edad;
         this.ciudad = ciudad;
+        this.carreras=new ArrayList<>();
     }
 
     public Long getDni() {
@@ -63,6 +65,9 @@ public class Estudiante implements Serializable {
     public String getCiudad() {
         return ciudad;
     }
+    public void addCarrera(Carrera_Estudiante carrera){
+        this.carreras.add(carrera);
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -81,5 +86,18 @@ public class Estudiante implements Serializable {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "dni=" + dni +
+                ", libretaUniversitaria=" + libretaUniversitaria +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", genero='" + genero + '\'' +
+                ", edad=" + edad +
+                ", ciudad='" + ciudad + '\'' +
+                '}';
     }
 }
