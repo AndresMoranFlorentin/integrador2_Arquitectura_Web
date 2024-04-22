@@ -44,7 +44,7 @@ public class Main {
         RepositorioCarreraEstudiante repCarreEstu=mysql.getCarreraEstudiante();
         Carrera carreraX=repCarre.getCarrera(1L);
         Estudiante estuX=rpEstu.getEstudiantePorNumLibreta(1983L);
-        repCarreEstu.matricularEstudiante(estuX,carreraX);
+//        repCarreEstu.matricularEstudiante(estuX,carreraX);
         /**
          * Consigna 3) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
          */
@@ -67,9 +67,12 @@ public class Main {
         /**
          * Consigna 6) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
          */
-        //List<CarreraDto> carrerasInscriptos=repCarre.getCarrerasConInscriptos();
-        //Iterator<CarreraDto> it=carrerasInscriptos.iterator();
-        //while ()
+        List<CarreraDto> carrerasInscriptos=repCarre.getCarrerasConInscriptos();
+        Iterator<CarreraDto> it=carrerasInscriptos.iterator();
+        while (it.hasNext()){
+            CarreraDto car=it.next();
+            System.out.println(car.toString());
+        }
         System.out.println("hasta aca funciona");
 
     }

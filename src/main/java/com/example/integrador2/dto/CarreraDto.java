@@ -30,4 +30,14 @@ public class CarreraDto {
     public int getCant_inscriptos() {
         return cant_inscriptos;
     }
+
+    @Override
+    public String toString() {
+        return "CarreraDto{" +
+                "id_carrera=" + id_carrera +
+                ", nombre='" + nombre + '\'' +
+                ", duracion=" + duracion +
+                ", cant_inscriptos=" + cant_inscriptos +
+                '}';
+    }
 }

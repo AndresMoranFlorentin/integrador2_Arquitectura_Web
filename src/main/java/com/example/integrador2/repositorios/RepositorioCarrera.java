@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RepositorioCarrera implements RepoCarreraInt {
@@ -35,15 +36,25 @@ public class RepositorioCarrera implements RepoCarreraInt {
     @Override
     public List<CarreraDto> getCarrerasConInscriptos() {
         em.getTransaction().begin();
-        List<CarreraDto> carreras=new ArrayList<>();
-        String jpql="SELECT c, COUNT(*) AS inscriptos FROM Carrera c" +
-                " JOIN Carrera_Estudiante ce" +
-                " WHERE (c.id=ce.id_carrera)" +
-                " GROUP BY(c.id)" +
-                " ORDER BY DESC(inscriptos)";
+        List<CarreraDto> carreras=new ArrayList<CarreraDto>();
+        String jpql="SELECT c.id_carrera,c.nombre,c.duracion, COUNT(c.id_carrera) AS inscriptos FROM Carrera AS c " +
+                "JOIN Carrera_Estudiante AS ce " +
+                "WHERE c.id_carrera=ce.id_carrera " +
+                "GROUP BY (c.id_carrera) " +
+                "ORDER BY inscriptos DESC";
         Query query= em.createQuery(jpql);
-        carreras=query.getResultList();
+        Iterator<CarreraDto> it=query.getResultList().iterator();
+        while(it.hasNext()){
+            CarreraDto nuevo=it.next();
+            Long id=nuevo.getId_carrera();
+            String nombre=nuevo.getNombre();
+            int duracion=nuevo.getDuracion();
+            int cantInscriptos=nuevo.getCant_inscriptos();
+            System.out.println(id+", "+nombre+", "+cantInscriptos);
+//            carreras.add(new CarreraDto(id,nombre,duracion,cantInscriptos));
+        }
         em.getTransaction().commit();
+
         return carreras;
     }
 }
