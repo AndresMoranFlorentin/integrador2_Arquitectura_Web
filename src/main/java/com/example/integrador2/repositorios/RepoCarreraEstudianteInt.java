@@ -4,5 +4,5 @@ import com.example.integrador2.entidades.Carrera;
 import com.example.integrador2.entidades.Estudiante;
 
 public interface RepoCarreraEstudianteInt {
-    void matricularEstudiante(Estudiante estu, Carrera carrera);
+    void matricularEstudiante(Estudiante estu, Carrera carrera,Long id);
 }

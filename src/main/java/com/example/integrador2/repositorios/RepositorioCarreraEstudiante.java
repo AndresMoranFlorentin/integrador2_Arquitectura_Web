@@ -16,13 +16,13 @@ public class RepositorioCarreraEstudiante implements RepoCarreraEstudianteInt{
         this.em=em;
     }
     @Override
-    public void matricularEstudiante(Estudiante estu, Carrera carrera) {
+    public void matricularEstudiante(Estudiante estu, Carrera c, Long id) {
         em.getTransaction().begin();
        //variables que cargaran los datos para el nuevo registro de estudiante_carrera
         int hoy=LocalDate.now().getYear();
-        Long id=110L;
+        //esto es algo grave porque el id deberia irse auto-incrementando
         Long dni=estu.getDni();
-        Long idCarre=carrera.getId_carrera();
+        Long idCarre=c.getId_carrera();
         LocalDate fechaInscripcion= LocalDate.now();
 
         int antiguedad=0;
@@ -34,8 +34,8 @@ public class RepositorioCarreraEstudiante implements RepoCarreraEstudianteInt{
         estu.addCarrera(nuevoRegistro);
         em.merge(estu);
 
-        carrera.addEstudianteAlaCarrera(nuevoRegistro);
-        em.merge(carrera);
+        c.addEstudianteAlaCarrera(nuevoRegistro);
+        em.merge(c);
 
         //ahora se suben los cambios y se persiste este nuevo registro
 

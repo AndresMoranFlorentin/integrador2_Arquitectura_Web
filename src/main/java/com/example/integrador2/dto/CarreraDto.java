@@ -7,7 +7,6 @@ public class CarreraDto {
     private String nombre;
     private int duracion;
     private int cant_inscriptos;
-
     public CarreraDto(Long id_carrera, String nombre, int duracion, int cant_inscriptos) {
         this.id_carrera = id_carrera;
         this.nombre = nombre;

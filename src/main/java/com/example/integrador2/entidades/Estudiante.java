@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 public class Estudiante implements Serializable {
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dni;
     @Column
     private Long libretaUniversitaria;
@@ -92,7 +93,7 @@ public class Estudiante implements Serializable {
     public String toString() {
         return "Estudiante{" +
                 "dni=" + dni +
-                ", libretaUniversitaria=" + libretaUniversitaria +
+                ", lU=" + libretaUniversitaria +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", genero='" + genero + '\'' +
