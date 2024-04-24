@@ -40,6 +40,16 @@ public class RepositorioEstudiante implements RepoEstudianteInt {
         return estudiantes;
     }
 
+    public List<Estudiante> getEstudiantesPorOrden() {
+        List<Estudiante> estudiantes = new ArrayList<>();
+        String jpql = "SELECT e FROM Estudiante e " +
+                "ORDER BY e.apellido ASC";
+        Query query= em.createQuery(jpql);
+        estudiantes=query.getResultList();
+
+        return estudiantes;
+    }
+
     @Override
     public List<Estudiante> getEstudiantePorCarrera(Carrera c, String ciudad) {
         em.getTransaction().begin();

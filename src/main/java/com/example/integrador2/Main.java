@@ -51,6 +51,10 @@ public class Main {
         /**
          * Consigna 3) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
          */
+        List<Estudiante> listaEstudiantesOrd=rpEstu.getEstudiantesPorOrden();
+        System.out.println("lista de los estudiantes ordenados alfabeticamente: ");
+        imprimirLista(listaEstudiantesOrd);
+        System.out.println("------------------------------------------------");
 
         /**
          * Consigna 4) recuperar un estudiante, con base en su número de libreta universitaria.
