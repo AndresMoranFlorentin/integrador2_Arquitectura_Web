@@ -2,6 +2,7 @@ package com.example.integrador2;
 
 import com.example.integrador2.ayudantes.SubirCsv;
 import com.example.integrador2.dto.CarreraDto;
+import com.example.integrador2.dto.ReporteTdo;
 import com.example.integrador2.entidades.Carrera;
 import com.example.integrador2.entidades.Estudiante;
 import com.example.integrador2.factories.FactoryGeneral;
@@ -14,6 +15,9 @@ import java.text.ParseException;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Clase encargada de realizar las consultas y pedidos a las entidades y su base de datos
+ */
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         FactoryMySQL mysql = (FactoryMySQL) FactoryGeneral.getFactory(2);
@@ -51,8 +55,8 @@ public class Main {
         /**
          * Consigna 3) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
          */
-        List<Estudiante> listaEstudiantesOrd=rpEstu.getEstudiantesPorOrden();
-        System.out.println("lista de los estudiantes ordenados alfabeticamente: ");
+        List<Estudiante> listaEstudiantesOrd=rpEstu.getEstudiantesPorOrdenDelApellido();
+        System.out.println("lista de los estudiantes ordenados alfabeticamente por apellido: ");
         imprimirLista(listaEstudiantesOrd);
         System.out.println("------------------------------------------------");
 
@@ -97,9 +101,16 @@ public class Main {
             Estudiante estudiante=ite.next();
             System.out.println(estudiante.toString());
         }
+        System.out.println("--------------------------------------------------------");
         /*Generar un reporte de las carreras, que para cada carrera incluya
          información de los inscriptos y egresados por año. Se deben ordenar
           las carreras alfabéticamente, y presentar los años de manera cronológica. */
+
+        List<ReporteTdo> listaReportes=repCarre.getCarrerasConInscriptosEgresados();
+
+        for (ReporteTdo r : listaReportes) {
+            System.out.println(r.toString());
+        }
 
     }
 

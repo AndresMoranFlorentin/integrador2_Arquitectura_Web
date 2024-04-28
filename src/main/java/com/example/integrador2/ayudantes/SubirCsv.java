@@ -14,13 +14,29 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Esta es una clase hecha para subir los datos de csv dados a traves de direcciones de csv
+ * @version 25/4/2024 A.0
+ */
 public class SubirCsv {
     private EntityManager eManager;
 
+    /**
+     *
+     * @param em es el entity manager o sea el que gestiona las transacciones de la
+     *           base de datos con los objetos-entidades
+     */
     public SubirCsv(EntityManager em) {
         this.eManager = em;
     }
 
+    /**
+     * Metodo encargado de leer el archivo csv de Carreras y transformarlos en
+     * una lista de objetos Carrera
+     * @param url es la direccion dentro del proyecto donde está guardado el archivo csv
+     * @throws IOException clase encargada de recibir el error que pueda suceder con las
+     * clases buferedReader y FileReader
+     */
     public void insertarCarreras(String url) throws IOException {
         eManager.getTransaction().begin();
         BufferedReader lector = new BufferedReader(new FileReader(url));
@@ -39,6 +55,12 @@ public class SubirCsv {
         eManager.getTransaction().commit();
      }
 
+    /**
+     * Metodo encargado de leer el archivo csv para Estudiantes y transformarlos en objetos Estudiantes y subirlos
+     * a la base de datos
+     * @param url direccion de donde se encuentra el csv de Estudiantes
+     * @throws IOException receptor de los errores que puedan surgir de las clases Bufered Reader y FileReader
+     */
     public void insertarEstudiantes(String url) throws IOException {
         eManager.getTransaction().begin();
         BufferedReader lector = new BufferedReader(new FileReader(url));
@@ -61,7 +83,13 @@ public class SubirCsv {
         eManager.getTransaction().commit();
      }
 
-    public void insertarCarreraEstudiante(String urlEstuCarre) throws IOException, ParseException {
+    /**
+     * Metodo encargado de leer los datos del csv CarreraEstudiante, o sea los que guardan
+     * la relacion Carrera y Estudiante y transformarlos en objetos que son subidos a la base de datos
+     * @param urlEstuCarre direccion de donde está el csv de Carrera_Estudiante
+     * @throws IOException receptor de los errores que puedan surgir de las clases Bufered Reader y FileReader
+     */
+    public void insertarCarreraEstudiante(String urlEstuCarre) throws IOException {
         eManager.getTransaction().begin();
         BufferedReader lector = new BufferedReader(new FileReader(urlEstuCarre));
 
@@ -77,12 +105,12 @@ public class SubirCsv {
                 int añoGraduacion = Integer.parseInt(filas[4]);
                 int antiguedad = Integer.parseInt(filas[5]);
 
-                LocalDate inscripcion = LocalDate.ofYearDay(añoInscripcion, 1); // El primer día del año de inscripción
-                LocalDate graduacion = LocalDate.ofYearDay(añoGraduacion, 1); // El primer día del año de graduación
+                //LocalDate inscripcion = LocalDate.ofYearDay(añoInscripcion, 1); // El primer día del año de inscripción
+               // LocalDate graduacion = LocalDate.ofYearDay(añoGraduacion, 1); // El primer día del año de graduación
                 if(añoGraduacion==0){
-                    graduacion=null;
+                   añoGraduacion=0;
                 }
-                Carrera_Estudiante carreEstu = new Carrera_Estudiante(id, dni, idCarrera, inscripcion, graduacion, antiguedad);
+                Carrera_Estudiante carreEstu = new Carrera_Estudiante(id, dni, idCarrera, añoInscripcion, añoGraduacion, antiguedad);
 
                 eManager.persist(carreEstu);
             }
