@@ -89,26 +89,45 @@ public class RepositorioCarrera implements RepoCarreraInt {
     public List<ReporteTdo> getCarrerasConInscriptosEgresados() {
         em.getTransaction().begin();
         List<ReporteTdo> lista=new ArrayList<ReporteTdo>();
-        String jpql="SELECT c.nombre, ce.fecha_inscripcion," +
-                "COUNT(ce.dni) , COUNT(ce.fecha_graduacion) " +
+        String subquery = "(SELECT DISTINCT ce1.fechaInscripcion AS anio FROM CarreraEstudiante ce1 " +
+                "UNION ALL " +
+                "SELECT DISTINCT ce2.fechaGraduacion AS anio FROM CarreraEstudiante ce2)";
+
+        String jpql = "SELECT c.nombre, " +
+                "ce.fecha_inscripcion AS anio_inscripcion, " +
+                "COUNT(ce.dni) AS inscriptos, " +
+                "SUM(CASE WHEN ce.fecha_graduacion IS NOT NULL THEN 1 ELSE 0 END) AS egresados " +
+                "FROM Carrera c " +
+                "LEFT JOIN c.estudiantes ce " +
+                "GROUP BY c.nombre, ce.fecha_inscripcion " +
+                "ORDER BY c.nombre ASC, ce.fecha_inscripcion ASC";
+        /*SELECT c.nombre, a.anio AS anio_inscripcion,
+COUNT(ce.dni) AS inscriptos,
+SUM(CASE WHEN ce.fecha_graduacion IS NOT NULL THEN 1 ELSE 0 END) AS egresados
+FROM Carrera AS c
+LEFT JOIN c.estudiantes ce
+LEFT JOIN (SELECT ce1.fecha_inscripcion AS anio FROM Carrera c1 JOIN Carrera_Estudiante ce1
+ UNION   SELECT DISTINCT YEAR(ce2.fecha_graduacion) AS anio FROM Carrera c2 JOIN Carrera_Estudiante ce2) a ON YEAR(ce.fecha_inscripcion) = a.anio OR YEAR(ce.fecha_graduacion) = a.anio ,
+GROUP BY c.nombre, a.anio
+ORDER BY c.nombre ASC, a.anio*/
+        String jpql2="SELECT c.nombre, ce.fecha_inscripcion," +
+                "COUNT(ce.dni) , " +
+                "SUM(CASE WHEN ce.fecha_graduacion IS NOT NULL THEN 1 ELSE 0 END) AS egresados " +
                 "FROM Carrera AS c " +
                 "JOIN Carrera_Estudiante AS ce " +
                 "WHERE (c.id_carrera = ce.id_carrera) "+
-                "GROUP BY c.nombre,ce.fecha_inscripcion "+//,ce.fecha_inscripcion,ce.fecha_graduacion
-                "ORDER BY c.nombre,ce.fecha_inscripcion,ce.fecha_graduacion ASC ";
+                "GROUP BY c.nombre,ce.fecha_inscripcion "+
+                "ORDER BY c.nombre,ce.fecha_inscripcion,egresados ASC ";
         Query query=em.createQuery(jpql);
         List<Object[]> resultado=query.getResultList();
         for(Object[]r: resultado) {
             String nombre = (String) r[0];
-            int fecha = (int) r[1];
+            Integer fecha = (Integer) r[1];
             Long inscriptos = (Long) r[2];
             Long graduados = (Long) r[3];
-            if(graduados==0){
-                graduados=0L;
-            }
-           // System.out.println("nombre: "+nombre+", fecha: "+fecha+", inscriptos: "+inscriptos+", graduados: "+graduados);
-            ReporteTdo nuevo=new ReporteTdo(nombre,fecha,inscriptos,graduados);
-            lista.add(nuevo);
+            System.out.println("nombre: "+nombre+", fecha: "+fecha+", inscriptos: "+inscriptos+", graduados: "+graduados);
+//            ReporteTdo nuevo=new ReporteTdo(nombre,fecha,inscriptos,graduados);
+//            lista.add(nuevo);
         }
         em.getTransaction().commit();
         return lista;

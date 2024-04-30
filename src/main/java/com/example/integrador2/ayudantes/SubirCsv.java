@@ -101,14 +101,14 @@ public class SubirCsv {
                 Long id = Long.parseLong(filas[0]);
                 Long dni=Long.parseLong(filas[1]);
                 Long idCarrera=Long.parseLong(filas[2]);
-                int añoInscripcion = Integer.parseInt(filas[3]);
-                int añoGraduacion = Integer.parseInt(filas[4]);
+                Integer añoInscripcion = Integer.parseInt(filas[3]);
+                Integer añoGraduacion = Integer.parseInt(filas[4]);
                 int antiguedad = Integer.parseInt(filas[5]);
 
                 //LocalDate inscripcion = LocalDate.ofYearDay(añoInscripcion, 1); // El primer día del año de inscripción
                // LocalDate graduacion = LocalDate.ofYearDay(añoGraduacion, 1); // El primer día del año de graduación
                 if(añoGraduacion==0){
-                   añoGraduacion=0;
+                   añoGraduacion=null;
                 }
                 Carrera_Estudiante carreEstu = new Carrera_Estudiante(id, dni, idCarrera, añoInscripcion, añoGraduacion, antiguedad);
 

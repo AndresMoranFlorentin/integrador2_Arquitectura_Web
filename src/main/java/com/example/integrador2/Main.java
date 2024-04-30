@@ -29,52 +29,52 @@ public class Main {
          * la base de datos, primero las carreras luego los estudiantes y finalmente las carrera_estudiantes
          */
         SubirCsv subir_csv=new SubirCsv(mysql.getEntManager());
-        subir_csv.insertarCarreras(urlCarreras);
-        subir_csv.insertarEstudiantes(urlEstudiantes);
-        subir_csv.insertarCarreraEstudiante(urlCarreEstu);
+//        subir_csv.insertarCarreras(urlCarreras);
+//        subir_csv.insertarEstudiantes(urlEstudiantes);
+//        subir_csv.insertarCarreraEstudiante(urlCarreEstu);
         /**
          * consigna 1) dar de alta un estudiante
          */
         Estudiante nuevoE=new Estudiante(44830983L,1983L,"Ramiro","Velazques","Male",24,"Azul");
         RepositorioEstudiante rpEstu=mysql.getEstudiante();
-        rpEstu.darDeAltaEstudiante(nuevoE);
-        System.out.println("El estudiante "+nuevoE.getNombre()+" "+nuevoE.getApellido()+", fue dado de alta");
-        System.out.println("--------------------------------------------------------------");
+//        rpEstu.darDeAltaEstudiante(nuevoE);
+//        System.out.println("El estudiante "+nuevoE.getNombre()+" "+nuevoE.getApellido()+", fue dado de alta");
+//        System.out.println("--------------------------------------------------------------");
         /**
          * consigna 2) matricular un estudiante en una carrera
          */
         RepositorioCarrera repCarre=mysql.getCarrera();
-        RepositorioCarreraEstudiante repCarreEstu=mysql.getCarreraEstudiante();
-        Carrera carreraX=repCarre.getCarrera(1L);
-        Estudiante estuX=rpEstu.getEstudiantePorNumLibreta(1983L);
+//        RepositorioCarreraEstudiante repCarreEstu=mysql.getCarreraEstudiante();
+//        Carrera carreraX=repCarre.getCarrera(1L);
+//        Estudiante estuX=rpEstu.getEstudiantePorNumLibreta(1983L);
         Long id=110L;//-->este es el id de la tabla Carrera Estudiante
-        repCarreEstu.matricularEstudiante(estuX,carreraX,id);
-        System.out.println("Se matriculo con exito al estudiante "+estuX.getNombre()+" "+estuX.getApellido()+"" +
-                ", en la carrera : "+carreraX.getNombre());
-        System.out.println("----------------------------------------------------");
+//        repCarreEstu.matricularEstudiante(estuX,carreraX,id);
+//        System.out.println("Se matriculo con exito al estudiante "+estuX.getNombre()+" "+estuX.getApellido()+"" +
+//                ", en la carrera : "+carreraX.getNombre());
+//        System.out.println("----------------------------------------------------");
         /**
          * Consigna 3) recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
          */
-        List<Estudiante> listaEstudiantesOrd=rpEstu.getEstudiantesPorOrdenDelApellido();
-        System.out.println("lista de los estudiantes ordenados alfabeticamente por apellido: ");
-        imprimirLista(listaEstudiantesOrd);
+//        List<Estudiante> listaEstudiantesOrd=rpEstu.getEstudiantesPorOrdenDelApellido();
+//        System.out.println("lista de los estudiantes ordenados alfabeticamente por apellido: ");
+//        imprimirLista(listaEstudiantesOrd);
         System.out.println("------------------------------------------------");
 
         /**
          * Consigna 4) recuperar un estudiante, con base en su número de libreta universitaria.
          */
         Long lU=19844L;
-        Estudiante estuZ=rpEstu.getEstudiantePorNumLibreta(19844L);
-        System.out.println(" El estudiante que se busco es el que tiene libreta universitaria "+lU+"L,:");
-        System.out.println(estuZ.toString());
+//        Estudiante estuZ=rpEstu.getEstudiantePorNumLibreta(19844L);
+//        System.out.println(" El estudiante que se busco es el que tiene libreta universitaria "+lU+"L,:");
+//        System.out.println(estuZ.toString());
         System.out.println("-----------------------------------------------");
         /**
          * Consigna 5) recuperar todos los estudiantes, en base a su género.
          */
         String genero="Female";
         List<Estudiante> listaEstudiantesMujeres=rpEstu.getEstudiantePorGenero(genero);
-        System.out.println("lista de los estudiantes del genero: "+genero);
-        imprimirLista(listaEstudiantesMujeres);
+//        System.out.println("lista de los estudiantes del genero: "+genero);
+//        imprimirLista(listaEstudiantesMujeres);
         System.out.println("------------------------------------------------");
         /**
          * Consigna 6) recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
@@ -108,9 +108,9 @@ public class Main {
 
         List<ReporteTdo> listaReportes=repCarre.getCarrerasConInscriptosEgresados();
 
-        for (ReporteTdo r : listaReportes) {
-            System.out.println(r.toString());
-        }
+//        for (ReporteTdo r : listaReportes) {
+//            System.out.println(r.toString());
+//        }
 
     }
 

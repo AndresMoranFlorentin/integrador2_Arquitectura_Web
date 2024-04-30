@@ -20,9 +20,9 @@ public class Carrera_Estudiante implements Serializable {
     @Id
     private Long id_carrera;
     @Column
-    private int fecha_inscripcion;
+    private Integer fecha_inscripcion;
     @Column
-    private int fecha_graduacion;
+    private Integer fecha_graduacion;
     @Column
     private int antiguedad;
     @ManyToOne
@@ -48,7 +48,7 @@ public class Carrera_Estudiante implements Serializable {
      * @param graduacion la fecha en la que se graduo, puede ser nulla
      * @param antiguedad y la antiguedad desde que se inscribio el estudiante a la carrera
      */
-    public Carrera_Estudiante(Long id,Long dni,Long id_carrera, int fecha_inscripcion,int graduacion,int antiguedad) {
+    public Carrera_Estudiante(Long id,Long dni,Long id_carrera, Integer fecha_inscripcion,Integer graduacion,int antiguedad) {
         this.id=id;
         this.dni = dni;
         this.id_carrera = id_carrera;
