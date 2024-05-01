@@ -108,9 +108,9 @@ public class Main {
 
         List<ReporteTdo> listaReportes=repCarre.getCarrerasConInscriptosEgresados();
 
-//        for (ReporteTdo r : listaReportes) {
-//            System.out.println(r.toString());
-//        }
+        for (ReporteTdo r : listaReportes) {
+            System.out.println(r.toString());
+        }
 
     }
 

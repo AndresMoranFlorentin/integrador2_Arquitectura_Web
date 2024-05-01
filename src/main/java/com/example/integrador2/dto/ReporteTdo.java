@@ -41,4 +41,8 @@ public class ReporteTdo implements Serializable {
                 ", egresados=" + egresados +
                 '}';
     }
+
+    public void setGraduados(long graduadosCount) {
+        this.egresados=graduadosCount;
+    }
 }
