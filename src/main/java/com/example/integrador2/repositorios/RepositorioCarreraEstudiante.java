@@ -41,7 +41,6 @@ public class RepositorioCarreraEstudiante implements RepoCarreraEstudianteInt{
         em.getTransaction().begin();
        //variables que cargaran los datos para el nuevo registro de estudiante_carrera
         int hoy=LocalDate.now().getYear();
-        //esto es algo grave porque el id deberia irse auto-incrementando
         Long dni=estu.getDni();
         Long idCarre=c.getId_carrera();
         int fechaInscripcion= LocalDate.now().getYear();
@@ -50,14 +49,11 @@ public class RepositorioCarreraEstudiante implements RepoCarreraEstudianteInt{
         //se crea el nuevo registro
         Carrera_Estudiante nuevoRegistro=new Carrera_Estudiante(id,dni,idCarre,fechaInscripcion,0,antiguedad);
         em.persist(nuevoRegistro);
-
         //se agrega el registro al estudiante y la carrera
         estu.addCarrera(nuevoRegistro);
         em.merge(estu);
-
         c.addEstudianteAlaCarrera(nuevoRegistro);
         em.merge(c);
-
         //ahora se suben los cambios y se persiste este nuevo registro
 
         em.getTransaction().commit();

@@ -8,18 +8,15 @@ public class ReporteTdo implements Serializable {
     private int anio;
     private Long inscriptos;
     private Long egresados;
-
     public ReporteTdo(String nombre, int anio, Long inscriptos, Long egresados) {
         this.nombre = nombre;
         this.anio = anio;
         this.inscriptos = inscriptos;
         this.egresados = egresados;
     }
-
     public String getNombre() {
         return nombre;
     }
-
     public int getAnio() {
         return anio;
     }
@@ -41,7 +38,6 @@ public class ReporteTdo implements Serializable {
                 ", egresados=" + egresados +
                 '}';
     }
-
     public void setGraduados(long graduadosCount) {
         this.egresados=graduadosCount;
     }

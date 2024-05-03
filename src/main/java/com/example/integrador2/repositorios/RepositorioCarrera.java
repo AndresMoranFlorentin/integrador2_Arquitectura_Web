@@ -88,63 +88,6 @@ public class RepositorioCarrera implements RepoCarreraInt {
         return carreras;
     }
 
-   /*  public List<ReporteTdo> getCarrerasConInscriptosEgresados1() {
-        em.getTransaction().begin();
-        List<ReporteTdo> lista = new ArrayList<>();
-
-        // Consulta para carreras con inscriptos pero sin graduados
-        String jpqlInscriptos = "SELECT c.nombre, ce.fecha_inscripcion AS anio, COUNT(ce.fecha_inscripcion) AS inscriptos, 0 AS graduados " +
-                "FROM Carrera c " +
-                "INNER JOIN Carrera_Estudiante ce ON c.id_carrera = ce.id_carrera " +
-                "GROUP BY c.nombre, ce.fecha_inscripcion " +
-                "HAVING inscriptos != 0";
-
-        // Consulta para carreras con graduados pero sin inscriptos
-        String jpqlGraduados = "SELECT c.nombre, ce.fecha_graduacion, 0 AS inscriptos, COUNT(ce.fecha_graduacion) AS graduados " +
-                "FROM Carrera c " +
-                "INNER JOIN Carrera_Estudiante ce ON c.id_carrera = ce.id_carrera " +
-                "GROUP BY c.nombre, ce.fecha_graduacion " +
-                "HAVING graduados != 0";
-
-        Query queryInscriptos = em.createNativeQuery(jpqlInscriptos);
-        Query queryGraduados = em.createNativeQuery(jpqlGraduados);
-
-        List<Object[]> resultadoInscriptos = queryInscriptos.getResultList();
-        List<Object[]> resultadoGraduados = queryGraduados.getResultList();
-
-        // Combinar resultados
-        for (Object[] inscriptos : resultadoInscriptos) {
-            String nombre = (String) inscriptos[0];
-            Integer anio = (Integer) inscriptos[1];
-            Long inscriptosCount = (Long) inscriptos[2];
-
-            lista.add(new ReporteTdo(nombre, anio, inscriptosCount, 0L));
-        }
-
-        for (Object[] graduados : resultadoGraduados) {
-            String nombre = (String) graduados[0];
-            int anio = (int) graduados[1];
-            long graduadosCount = (long) graduados[3];
-
-            // Buscar si ya existe la carrera en la lista
-            boolean carreraEncontrada = false;
-            for (ReporteTdo reporte : lista) {
-                if (reporte.getNombre().equals(nombre) && reporte.getAnio() == anio) {
-                    reporte.setGraduados(graduadosCount);
-                    carreraEncontrada = true;
-                    break;
-                }
-            }
-
-            // Si la carrera no está en la lista, añadirla
-            if (!carreraEncontrada) {
-                lista.add(new ReporteTdo(nombre, anio, 0L, graduadosCount));
-            }
-        }
-
-        em.getTransaction().commit();
-        return lista;
-    }*/
     @Override
     public List<ReporteTdo> getCarrerasConInscriptosEgresados() {
         em.getTransaction().begin();
@@ -168,8 +111,7 @@ public class RepositorioCarrera implements RepoCarreraInt {
             Integer fecha = (Integer) r[1];
             Long inscriptos = (Long) r[2];
             Long graduados = (Long) r[3];
-           // System.out.println("nombre: "+nombre+", fecha: "+fecha+", inscriptos: "+inscriptos+", graduados: "+graduados);
-            ReporteTdo nuevo=new ReporteTdo(nombre,fecha,inscriptos,graduados);
+             ReporteTdo nuevo=new ReporteTdo(nombre,fecha,inscriptos,graduados);
              lista.addLast(nuevo);
         }
         em.getTransaction().commit();
